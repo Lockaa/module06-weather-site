@@ -6,30 +6,70 @@ function outputWeather() {
   const cityInput = document.getElementById('city-input');
   const apiKey = '820214c8a31808ffafdb376998c9d618';
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?
-                      q=${cityInput.value}&appid=${apiKey}&units=imperial`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=imperial`;
   fetch(weatherUrl)
     .then(function (responseObj) {
       return responseObj.json();
     })
     .then(function (data) {
-      const html = `
-      <h2>
+      const html = 
+      `<h2>
+        lon: ${data.coord.lon}
+        <br>
+        lat: ${data.coord.lat}
+        <br>
+        ${data.dt}
+        <br>
+        Weather.main: ${data.weather.main}
+        <br>
+        Weather.description: ${data.weather.description}
+        <br>
         Temp: ${data.main.temp}
-      </h2>
-      `;
-      //  <br>
-      //  Wind: ${data.main.wind}
-      //  <br>
-      //  Humidity: ${data.main.humidity}
-      
+        <br>
+        Wind: ${data.wind.speed}
+        <br>
+        Humidity: ${data.main.humidity}
+      </h2>`;
       const outputDiv = document.querySelector('.output');
-
       outputDiv.innerHTML = html;
     })
     .catch(function (error) {
       console.log(error);
     });
+}
+
+function outputForecast(cityLonIn, cityLatIn) {
+  event.preventDefault()
+  const cityInput = document.getElementById('city-input');
+  const apiKey = '820214c8a31808ffafdb376998c9d618';
+
+  const forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily?lat=${cityLatIn}&lon=${cityLonIn}&cnt={5}&appid=${apiKey}';
+  fetch(forecastUrl)
+    .then(function (responseObj) {
+      return responseObj.json();
+    })
+    .then(function (data) {
+      const html = 
+      `<h2>
+        lon: ${data.coord.lon}
+        <br>
+        lat: ${data.coord.lat}
+        <br>
+        ${data.dt}
+        <br>
+        Weather.main: ${data.weather.main}
+        <br>
+        Weather.description: ${data.weather.description}
+        <br>
+        Temp: ${data.main.temp}
+        <br>
+        Wind: ${data.wind.speed}
+        <br>
+        Humidity: ${data.main.humidity}
+      </h2>`;
+      const outputDiv = document.querySelector('.output');
+      outputDiv.innerHTML = html;
+    })
 }
 
 //function for storing the city to localStorage
