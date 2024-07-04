@@ -1,11 +1,13 @@
 const weatherBtn = document.getElementById('weather-btn');
 
+//function for outputting the weather
 function outputWeather() {
+  event.preventDefault()
   const cityInput = document.getElementById('city-input');
   const apiKey = '820214c8a31808ffafdb376998c9d618';
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=atlanta&appid=${apiKey}&units=imperial`;
-  //https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?
+                      q=${cityInput.value}&appid=${apiKey}&units=imperial`;
   fetch(weatherUrl)
     .then(function (responseObj) {
       return responseObj.json();
@@ -14,12 +16,13 @@ function outputWeather() {
       const html = `
       <h2>
         Temp: ${data.main.temp}
-        <br>
-        Wind: ${data.main.wind}
-        <br>
-        Humidity: ${data.main.humidity}
       </h2>
       `;
+      //  <br>
+      //  Wind: ${data.main.wind}
+      //  <br>
+      //  Humidity: ${data.main.humidity}
+      
       const outputDiv = document.querySelector('.output');
 
       outputDiv.innerHTML = html;
@@ -29,8 +32,14 @@ function outputWeather() {
     });
 }
 
+//function for storing the city to localStorage
+function storeCity() {
+
+}
+
 if(weatherBtn) {
   weatherBtn.addEventListener('click', outputWeather);
+  weatherBtn.addEventListener('click', storeCity);
   console.log("button's good");
 }
 else {
