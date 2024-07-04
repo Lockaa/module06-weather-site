@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weather App</title>
-  <link href="css/style.css" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
 
-<body>
-  <h1>Weather App</h1>
-  <div class="container">
-    <form class="form">
-      <input type="text" id="userInput" placeholder="Which City?" required>
-      <button type="submit" class="request">Request</button>
-    </form>
-    <div class="output"></div>
+  <body>
+    <h1>Weather App</h1>
+    <div class="container">
+      <form class="form">
+        <input type="text" id="city-input" placeholder="Which City?" required>
+        <button id="weather-btn" class="request">Request</button>
+      </form>
+      <div class="output"></div>
 
-  </div>
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-  <script src="js/script.js">
-  </script>
-</body>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous">
+    </script>
+    <script src="js/script.js"></script>
+  </body>
 
 </html>
