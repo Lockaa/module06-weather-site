@@ -1,5 +1,5 @@
 const weatherBtn = document.getElementById('weather-btn');
-
+const cityArray = [];
 //function for outputting the weather
 function outputWeather() {
   event.preventDefault()
@@ -34,14 +34,17 @@ function outputWeather() {
 
 //function for storing the city to localStorage
 function storeCity() {
-
+  const cityInput = document.getElementById('city-input');
+  cityArray.push(cityInput.value);
+  localStorage.setItem("data", JSON.stringify(cityArray));
+  console.log(JSON.parse(localStorage.getItem("data")));
 }
 
-if(weatherBtn) {
-  weatherBtn.addEventListener('click', outputWeather);
-  weatherBtn.addEventListener('click', storeCity);
-  console.log("button's good");
-}
-else {
-  console.log("button potatoed");
-}
+weatherBtn.addEventListener('click', outputWeather);
+weatherBtn.addEventListener('click', storeCity);
+
+
+//TODO: 
+//figure out bad fetch (something with cityInput.value)
+//print out the local storage
+//format stuff
