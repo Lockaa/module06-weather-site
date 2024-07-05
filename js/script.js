@@ -20,10 +20,6 @@ function outputWeather() {
         <br>
         ${data.dt}
         <br>
-        Weather.main: ${data.weather.main}
-        <br>
-        Weather.description: ${data.weather.description}
-        <br>
         Temp: ${data.main.temp}
         <br>
         Wind: ${data.wind.speed}
@@ -31,7 +27,10 @@ function outputWeather() {
         Humidity: ${data.main.humidity}
       </h2>`;
       const outputDiv = document.querySelector('.output');
-      const coord = data.coord;
+      
+      const cityCoord = data.coord;
+      //call the forcast function since we have the values
+      outputForecast(coord.lat, coord.lon);
       outputDiv.innerHTML = html;
     })
     .catch(function (error) {
@@ -39,12 +38,13 @@ function outputWeather() {
     });
 }
 
-function outputForecast() {
+function outputForecast(cityLatIn, cityLonIn) {
   event.preventDefault()
   const cityInput = document.getElementById('city-input');
   const apiKey = '820214c8a31808ffafdb376998c9d618';
 
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${44.34}&lon=${10.99}&cnt=${5}&appid=${apiKey}&units=imperial`;
+  //throwing back an 'unauthorized' error
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${cityLatIn}&lon=${cityLonIn}&cnt=${5}&appid=${apiKey}&units=imperial`;
   fetch(forecastUrl)
     .then(function (responseObj) {
       return responseObj.json();
@@ -52,6 +52,7 @@ function outputForecast() {
     .then(function (data) {
       const html = 
       `<h2>
+      
         Temp: ${data.list.temp.day}
       </h2>`;
       const outputDiv = document.querySelector('.output');
