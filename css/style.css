@@ -29,18 +29,21 @@ button {
         cursor: pointer;
 }
 
-body .weather-output{
-        position: relative;
-        margin-left: 100px;
+body #weather-output{
+        position: absolute;
         margin-top: 20px;
-
 }
 
-body .forewast-output{
-        position: relative;
-        margin-left: 400px;
-        margin-top: 20px;
+body #storage-output{
+        position: absolute;
+        margin-top: 240px;
+}
 
+
+body #forecast-output{
+        position: absolute;
+        margin-top: -5%;
+        margin-left: 25%;
 }
 
 

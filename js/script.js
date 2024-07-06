@@ -63,18 +63,33 @@ function outputForecast(cityLatIn, cityLonIn) {
     })
   }
 //function for storing the city to localStorage
-function storeCity() {
+function outputCities() {
   const cityInput = document.getElementById('city-input');
   cityArray.push(cityInput.value);
   localStorage.setItem("data", JSON.stringify(cityArray));
-  console.log(JSON.parse(localStorage.getItem("data")));
+  const $cityOutput = $('.storage-output');
+  
+  //could also do forEach here, just JS forEach's are weird
+  for(var i = 0; i < JSON.parse(localStorage.getItem("data")).length; i++) {
+    $cityOutput.append(
+      `<div>
+      ${JSON.parse(localStorage.getItem("data"))[i]}
+      <br>
+      </div>`
+    )
+  }
+  localStorage.clear();
+  clearCities();
+}
+
+function clearCities() {
+  var $cities = $('.storage-output');
+  $cities = "";
 }
 
 weatherBtn.addEventListener('click', outputWeather);
-weatherBtn.addEventListener('click', storeCity);
+weatherBtn.addEventListener('click', outputCities);
 
 
-//TODO: 
-//figure out bad fetch (something with cityInput.value)
-//print out the local storage
-//format stuff
+//TODO:
+//clear the local storage, and make them links
