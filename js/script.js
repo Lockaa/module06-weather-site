@@ -4,40 +4,41 @@ const secondApiKey = '996b5fa3416b1804f4d4cda0e5653d5d';
 const cityArray = [];
 //function for outputting the weather
 function outputWeather() {
-  event.preventDefault()
+  event.preventDefault();
   const cityInput = document.getElementById('city-input');
 
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=imperial`;
   $.get(weatherUrl)
     .then(function (data) {
-      const html = 
+      currentDate = new Date();
+      const weatherResults = 
       `<h2>
-        ${data.dt}
+        ${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}
         <br>
-        Temp: ${data.main.temp}
+        Temp: ${data.main.temp} &deg
         <br>
-        Wind: ${data.wind.speed}
+        Wind: ${data.wind.speed} MPH
         <br>
-        Humidity: ${data.main.humidity}
+        Humidity: ${data.main.humidity}%
       </h2>`;
-      const outputDiv = document.querySelector('.output');
-      
+      const outputDiv = document.getElementById('weather-output');
+      outputDiv.innerHTML = weatherResults;      
       //call the forcast function since we have the values
       outputForecast(data.coord.lat, data.coord.lon);
       
-      outputDiv.innerHTML = html;
-    })
+    }
+  )
 }
 
 function outputForecast(cityLatIn, cityLonIn) {
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLatIn}&lon=${cityLonIn}&appid=${secondApiKey}&units=imperial`;
   $.get(forecastUrl)
     .then(function (data) {
-      const html = 'YIPPEE!';
-      const outputDiv = document.querySelector('.output');
-
-      outputDiv.innerHTML = html;
-    })
+      const outputDiv = document.getElementById('forecast-output');
+      const forecastResult = 'YIPPEE!';
+      outputDiv.innerHTML = forecastResult;
+    }
+  )
 }
 
 //function for storing the city to localStorage
@@ -49,8 +50,6 @@ function storeCity() {
 }
 
 weatherBtn.addEventListener('click', outputWeather);
-//weatherBtn.addEventListener('click', outputForecast);
-herBtn.addEventListener('click', outputForecast);
 weatherBtn.addEventListener('click', storeCity);
 
 
