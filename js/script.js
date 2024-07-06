@@ -11,18 +11,21 @@ function outputWeather() {
   $.get(weatherUrl)
     .then(function (data) {
       currentDate = new Date();
+      //idk why but data.weather.icon is undef... :/
       const weatherResults = 
       `<h2>
         ${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}
+        <br>
+        <img src=" https://openweathermap.org/img/wn/${data.weather.icon}2x.png" alt = 'weather icon image'>
         <br>
         Temp: ${data.main.temp} &deg
         <br>
         Wind: ${data.wind.speed} MPH
         <br>
-        Humidity: ${data.main.humidity}%
+        Humidity: ${data.main.humidity} %
       </h2>`;
-      const outputDiv = document.getElementById('weather-output');
-      outputDiv.innerHTML = weatherResults;      
+      const weatherOutput = document.getElementById('weather-output');
+      weatherOutput.innerHTML = weatherResults;     
       //call the forcast function since we have the values
       outputForecast(data.coord.lat, data.coord.lon);
       
@@ -34,13 +37,31 @@ function outputForecast(cityLatIn, cityLonIn) {
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLatIn}&lon=${cityLonIn}&appid=${secondApiKey}&units=imperial`;
   $.get(forecastUrl)
     .then(function (data) {
-      const outputDiv = document.getElementById('forecast-output');
-      const forecastResult = 'YIPPEE!';
-      outputDiv.innerHTML = forecastResult;
-    }
-  )
-}
-
+      const $forecastOutput = $('.forecast-output');
+      // Filter out from the 40 weather objects you receive, the 5 noon time weather objects for the next 5 days
+      const filtered = data.list.filter(function (weatherObj) {
+        if (weatherObj.dt_txt.includes('12')) return true;
+      });
+    
+      forecastResults = '';
+      filtered.forEach(function (weatherObj) {
+        $forecastOutput.append(
+          `<div>
+            <h2>${weatherObj.dt_txt}</h2>
+            <br>
+            <img src="https://openweathermap.org/img/wn/${weatherObj.weather[0].icon}@2x.png" alt="weather icon image">
+            <br>
+            Temp: ${weatherObj.main.temp} &deg
+            <br>
+            Wind: ${weatherObj.wind.speed} MPH
+            <br>
+            Humidity: ${weatherObj.main.humidity} %
+          </div>`
+        )
+      })
+      //forecastOutput.innerHTML = forcastResults;
+    })
+  }
 //function for storing the city to localStorage
 function storeCity() {
   const cityInput = document.getElementById('city-input');
