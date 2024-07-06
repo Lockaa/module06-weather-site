@@ -13,8 +13,8 @@ function outputWeather() {
       currentDate = new Date();
       //idk why but data.weather.icon is undef... :/
       const weatherResults = 
-      `<h2>
-        ${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}
+      `<div>
+        <h2>${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}</h2>
         <br>
         <img src=" https://openweathermap.org/img/wn/${data.weather.icon}2x.png" alt = 'weather icon image'>
         <br>
@@ -23,7 +23,7 @@ function outputWeather() {
         Wind: ${data.wind.speed} MPH
         <br>
         Humidity: ${data.main.humidity} %
-      </h2>`;
+      </div>`;
       const weatherOutput = document.getElementById('weather-output');
       weatherOutput.innerHTML = weatherResults;     
       //call the forcast function since we have the values
@@ -45,9 +45,10 @@ function outputForecast(cityLatIn, cityLonIn) {
     
       forecastResults = '';
       filtered.forEach(function (weatherObj) {
+        forecastDate = new Date(weatherObj.dt_txt);
         $forecastOutput.append(
           `<div>
-            <h2>${weatherObj.dt_txt}</h2>
+            <h2>${forecastDate.getMonth()+1}/${forecastDate.getDate()+1}/${forecastDate.getFullYear()}</h2>
             <br>
             <img src="https://openweathermap.org/img/wn/${weatherObj.weather[0].icon}@2x.png" alt="weather icon image">
             <br>
@@ -59,7 +60,6 @@ function outputForecast(cityLatIn, cityLonIn) {
           </div>`
         )
       })
-      //forecastOutput.innerHTML = forcastResults;
     })
   }
 //function for storing the city to localStorage

@@ -8,7 +8,7 @@
 }
 
 body {
-        padding: 5%;
+        padding: 2%;
 }
 
 html body {
@@ -16,7 +16,7 @@ html body {
 }
 
 img {
-        max-width: 100%;
+        max-width: 50%;
 }
 
 a {
@@ -29,13 +29,29 @@ button {
         cursor: pointer;
 }
 
+body .weather-output{
+        position: relative;
+        margin-left: 100px;
+        margin-top: 20px;
+
+}
+
+body .forewast-output{
+        position: relative;
+        margin-left: 400px;
+        margin-top: 20px;
+
+}
+
+
+
 /* GLOBAL/REUSABLE CLASSES */
 .text-center {
         text-align: center;
 }
 
 .output {
-        margin-top: 35px;
+        margin-top: 20px;
 }
 
 
