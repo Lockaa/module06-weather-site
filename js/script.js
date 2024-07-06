@@ -4,17 +4,14 @@ const secondApiKey = '996b5fa3416b1804f4d4cda0e5653d5d';
 const cityArray = [];
 //function for outputting the weather
 function outputWeather(cityIn) {
-  //const cityInput = document.getElementById('city-input');
-  console.log("This is the city = ", cityIn);
-
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityIn}&appid=${apiKey}&units=imperial`;
   $.get(weatherUrl)
     .then(function (data) {
       currentDate = new Date();
-      console.log(data.dt);
-      //idk why but data.weather.icon is undef... :/
       const weatherResults = 
       `<div>
+        <h1>${cityIn}</h1>
+        <br>
         <h2>${currentDate.getMonth()+1}/${currentDate.getDate()}/${currentDate.getFullYear()}</h2>
         <br>
         <img src= "https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="weather icon image">
