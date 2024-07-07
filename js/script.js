@@ -42,24 +42,26 @@ function outputForecast(cityLatIn, cityLonIn) {
       });
       //clearing out the previous result
       $forecastOutput.empty();
-      filtered.forEach(function (weatherObj) {
-        forecastDate = new Date(weatherObj.dt_txt);
+      //outputing the first 5
+      for(var i = 0; i < 5; i++) {
+        tempObj = filtered[i];
+        forecastDate = new Date(tempObj.dt_txt);
         $forecastOutput.append(
           `<div>
             <h2>${forecastDate.getMonth()+1}/${forecastDate.getDate()}/${forecastDate.getFullYear()}</h2>
             <br>
-            <img src="https://openweathermap.org/img/wn/${weatherObj.weather[0].icon}@2x.png" alt="weather icon image">
+            <img src="https://openweathermap.org/img/wn/${tempObj.weather[0].icon}@2x.png" alt="weather icon image">
             <br>
-            Temp: ${weatherObj.main.temp} &deg
+            Temp: ${tempObj.main.temp} &deg
             <br>
-            Wind: ${weatherObj.wind.speed} MPH
+            Wind: ${tempObj.wind.speed} MPH
             <br>
-            Humidity: ${weatherObj.main.humidity} %
+            Humidity: ${tempObj.main.humidity} %
           </div>`
         )
-      })
+      }
     })
-  }
+}
 //function for storing the city to localStorage
 function outputCities() {
   const cityInput = document.getElementById('city-input');
