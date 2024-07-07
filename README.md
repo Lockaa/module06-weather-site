@@ -18,3 +18,6 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 ![alt text](./screenshot.png)
+
+Git deploy:
+https://lockaa.github.io/module06-weather-site/
